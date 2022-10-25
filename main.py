@@ -51,13 +51,13 @@ async def get_data(page):
 
     schema_markup = soup.find('script', {'type': 'application/ld+json'})
     if schema_markup:
-        schema_markup = schema_markup.text.strip()
+        schema_markup = schema_markup.text.strip('\n')
 
     data = {
         'title': soup.find('title').text.strip(),
         'meta_description': meta_discription,
         'headers': json.dumps(headers),
-        'schema_markup': schema_markup,
+        'schema_markup': json.dumps(schema_markup),
         'text': soup.text.replace('\n', ''),
     }
 
