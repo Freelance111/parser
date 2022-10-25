@@ -4,10 +4,9 @@ from bs4 import BeautifulSoup
 from postgresql import Database
 import time
 import json
+import threading
 
 db = Database()
-
-
 
 async def main():
     start_time = time.time()
@@ -19,8 +18,10 @@ async def main():
     pages = await asyncio.gather(*tasks)
     for page in pages:
         if page[0]:
-            data = await get_data(page[0])
-            await db.add_data(data, page[1])
+            # data = threading.Thread(target=get_data, args=(page[0], page[1])).start()
+            # threading.Thread(target=db.add_data, args=(data, page[1]))
+            data = get_data(page[0], page[1])
+            db.add_data(data, page[1])
 
     finish_time = time.time() - start_time
     print(f'time for script ---- {finish_time}')
@@ -36,9 +37,7 @@ async def get_website_code(url):
 
         return [await response.text(), url]
 
-
-
-async def get_data(page):
+def get_data(page, url):
     soup = BeautifulSoup(page, 'html.parser')
 
     meta_discription = soup.find('meta', {'name': 'description'})
@@ -49,9 +48,16 @@ async def get_data(page):
     for index, header in enumerate(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
         headers[header] = [h1.text.strip() for h1 in soup.find_all(header)]
 
-    schema_markup = soup.find('script', {'type': 'application/ld+json'})
-    if schema_markup:
-        schema_markup = schema_markup.text.strip('\n')
+    schema_markup = [i.text.strip('\n') for i in soup.find_all('script', {'type': 'application/ld+json'})]
+
+    with open('xpathes.json', 'r') as file:
+        xpathes = json.load(file)
+        element = None
+        try:
+            element = [soup.select(f'{i}')[0].text.strip() for i in xpathes[f'{url}']]
+        except KeyError as ex:
+            print(f"\tNo selectors were defined for this site --- {url}")
+
 
     data = {
         'title': soup.find('title').text.strip(),
@@ -59,8 +65,8 @@ async def get_data(page):
         'headers': json.dumps(headers),
         'schema_markup': json.dumps(schema_markup),
         'text': soup.text.replace('\n', ''),
+        'xpath': json.dumps(element)
     }
-
     return data
 
 

@@ -1,0 +1,8 @@
+{
+  "https://24sevenoffice.com/no/":
+  [
+    "#__layout > div > main > div > header > div > div > div > div.w-full.lg\\:\\!text-left > h2",
+    "#__layout > div > main > div > header > div > div > div > div.w-full.lg\\:\\!text-left > h1",
+    "#__layout > div > main > div > header > div > div > div > div.w-full.lg\\:\\!text-left > div.mt-4.text-xl.leading-8.text-center.tracking-\\[0\\.0075em\\].lg\\:text-2xl.lg\\:leading-\\[2\\.375rem\\].lg\\:mt-6.lg\\:max-w-\\[992px\\].m-auto.block-content.lg\\:\\!text-left > p"
+  ]
+}

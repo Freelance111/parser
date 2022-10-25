@@ -11,16 +11,18 @@ class Database:
         except Exception as ex:
             print(f'\tConnection refused\n\n {ex}')
 
-    async def add_data(self, data, url):
+    def add_data(self, data, url):
         sql = "UPDATE information SET site=%s, title=%s, meta_description=%s," \
-              "headers=%s, schema_markup=%s, text=%s, task_time=NOW()"
+              "headers=%s, xpath=%s, schema_markup=%s, text=%s, task_time=NOW()"
 
         with self.connection.cursor() as cursor:
             cursor.execute(sql, [url,
                                  data['title'],
                                  data['meta_description'],
                                  data['headers'],
+                                 data['xpath'],
                                  data['schema_markup'],
                                  data['text']])
 
             self.connection.commit()
+
