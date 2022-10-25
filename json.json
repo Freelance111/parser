@@ -1,0 +1,114 @@
+// parsed JSON response
+"http": {
+    "status": 200,
+    "contentSize": { // overall page size
+      "bytes": 85837,
+      "kb": 83
+    },
+    "headers": { // response headers from the webpage
+      "content-type": "text/html; charset=UTF-8",
+      "server": "Netlify",
+      "etag": "\"bb98a1421195a6d16059957683191a3d-ssl\""
+    },
+    "redirections": false, // if present, it would be in array format.
+    "responseTime": "0.12 seconds"
+},
+"metadata": {
+    "title": {
+      "data": "SEO Training and Link Building Strategies – Backlinko", //if not present, the value would be false
+      "characters": 53,
+      "words": 8,
+      "charPerWord": 6.63
+    },
+    "description": {
+      "data": "It's time to get backlinks that make a difference. Backlinko is the place for next-level SEO training and link building strategies.", // if not present, the value would be false
+      "characters": 131,
+      "words": 21,
+      "charPerWord": 6.24
+    },
+    "charset": "utf-8",
+    "canonical": "https://backlinko.com/",
+    "favicon": "https://backlinko.com/favicon-32x32.png?v=KmwbmdMLo6",
+    "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no",
+    "keywords": false,
+    "locale": "en_US",
+    "contentType": "article",
+    "site_name": "Backlinko",
+    "site_image": "https://api.backlinko.com/app/uploads/2015/06/backlinko.png",
+    "robots": "index, follow"
+  },
+"images": {
+  "summary": {
+    "total": 13,
+      "imagesWithoutSrc": 0,
+      "imagesWithoutAlt": 0
+   },
+  "data": [
+   {
+        "src": "https://api.backlinko.com/app/uploads/2020/02/kieran-flanagan-1.png",
+        "alt": "Kieran Flanagan" // (if not  present then value would be false)
+      },
+   // list goes on
+  ]
+},
+"content": {
+  "summary": {
+      "h1": 1,
+      "h2": 0,
+      "h3": 3,
+      "characters": 1015,
+      "words": 137,
+      "charPerWord": 7.4,
+      "contentSize": {  // This includes the text (without HTML) present in <body> tag.
+        "bytes": 1015,
+        "kb": 0.99
+      }
+    },
+  "headings": {
+   "h1": [] // array of strings,
+   "h2": [] // array of strings
+   "h3": [] // array of strings
+  }
+},
+"links": {
+    "summary": {
+      "totalLinks": 19,
+      "internals": 14,
+      "externals": 5,
+      "jumpLinks": 0,  // includes links which points to different sections of same page. eg: https://example.com#comment
+    "withoutHrefs": 0,
+      "linksWithoutText": 2, // without anchor text
+      "seoFriendly": 19, // links with <75 characters and no search params are considered as seo-friendly urls
+      "nonSeoFriendly": 0, // links with >75 characters or with search params are considered as non seo-friendly urls
+      "nofollow": 0,
+      "dofollow": 19,
+      "nofollowLinks": []
+    },
+    "data": {
+      "internals": [ //array of internal links
+        {
+          "link": "https://backlinko.com/",
+          "text": false, //anchortext
+          "linkQuality": "seo-friendly"
+        },
+    {
+          "link": "https://backlinko.com/long-url-over-75-characters",
+          "text": "Access",
+          "linkQuality": "non seo-friendly (long)"
+        },
+    {
+          "link": "https://backlinko.com?source=2",
+          "text": "2",
+          "linkQuality": "non seo-friendly (dynamic)"
+        },
+    {
+          "link": "https://backlinko.com/long-url-over-75-characters?source=2",
+          "text": false,
+          "linkQuality": "non seo-friendly (long and dynamic)"
+        },
+    // list goes on
+   ]
+    "jumpLinks": [] // array of jumpLinks
+    "externals": [] // array of external links
+  }
+}
