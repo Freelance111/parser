@@ -50,11 +50,11 @@ def get_data(page, url):
 
     schema_markup = [i.text.strip('\n') for i in soup.find_all('script', {'type': 'application/ld+json'})]
 
-    with open('xpathes.json', 'r') as file:
-        xpathes = json.load(file)
+    with open('selectors.json', 'r') as file:
+        selectors = json.load(file)
         element = None
         try:
-            element = [soup.select(f'{i}')[0].text.strip() for i in xpathes[f'{url}']]
+            element = [soup.select(f'{i}')[0].text.strip() for i in selectors[f'{url}']]
         except KeyError as ex:
             print(f"\tNo selectors were defined for this site --- {url}")
 
@@ -65,7 +65,7 @@ def get_data(page, url):
         'headers': json.dumps(headers),
         'schema_markup': json.dumps(schema_markup),
         'text': soup.text.replace('\n', ''),
-        'xpath': json.dumps(element)
+        'selectors': json.dumps(element)
     }
     return data
 

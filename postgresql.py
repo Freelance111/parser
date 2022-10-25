@@ -13,14 +13,14 @@ class Database:
 
     def add_data(self, data, url):
         sql = "UPDATE information SET site=%s, title=%s, meta_description=%s," \
-              "headers=%s, xpath=%s, schema_markup=%s, text=%s, task_time=NOW()"
+              "headers=%s, selectors=%s, schema_markup=%s, text=%s, task_time=NOW()"
 
         with self.connection.cursor() as cursor:
             cursor.execute(sql, [url,
                                  data['title'],
                                  data['meta_description'],
                                  data['headers'],
-                                 data['xpath'],
+                                 data['selectors'],
                                  data['schema_markup'],
                                  data['text']])
 
