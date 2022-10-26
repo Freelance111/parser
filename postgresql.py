@@ -12,8 +12,9 @@ class Database:
             print(f'\tConnection refused\n\n {ex}')
 
     def add_data(self, data, url):
-        sql = "UPDATE information SET site=%s, title=%s, meta_description=%s," \
-              "headers=%s, selectors=%s, schema_markup=%s, text=%s, task_time=NOW()"
+        sql = "INSERT INTO information(site, title, meta_description, headers, " \
+              "selectors, schema_markup, text, task_time) " \
+              "VALUES (%s, %s, %s, %s, %s, %s, %s, NOW())"
 
         with self.connection.cursor() as cursor:
             cursor.execute(sql, [url,
