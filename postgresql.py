@@ -1,6 +1,5 @@
 from config import config
 import psycopg2
-import time
 
 
 class Database:
@@ -9,7 +8,7 @@ class Database:
             self.connection = psycopg2.connect(**config)
             print('\tSuccessful connection')
         except Exception as ex:
-            print(f'\tConnection refused\n\n {ex}')
+            print(f'\n\tConnection refused\n {ex}')
 
     def add_data(self, data, url):
         sql = "INSERT INTO information(site, title, meta_description, headers, " \

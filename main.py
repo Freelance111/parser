@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from postgresql import Database
 import time
 import json
-import threading
 
 db = Database()
 
@@ -18,8 +17,6 @@ async def main():
     pages = await asyncio.gather(*tasks)
     for page in pages:
         if page[0]:
-            # data = threading.Thread(target=get_data, args=(page[0], page[1])).start()
-            # threading.Thread(target=db.add_data, args=(data, page[1]))
             data = get_data(page[0], page[1])
             db.add_data(data, page[1])
 
@@ -29,7 +26,7 @@ async def main():
 
 async def get_website_code(url):
     async with aiohttp.ClientSession() as session:
-        response = await session.get(url)
+        response = await session.get(url, ssl=False)
         print(response.status)
         if response.status in [301, 302, 403, 404, 500]:
             print(f'-----------------------{response.status}-----------------------')
@@ -52,11 +49,18 @@ def get_data(page, url):
 
     with open('selectors.json', 'r') as file:
         selectors = json.load(file)
-        element = None
-        try:
-            element = [soup.select(f'{i}')[0].text.strip() for i in selectors[f'{url}']]
-        except KeyError as ex:
-            print(f"\tNo selectors were defined for this site --- {url}")
+        elements = {}
+        if url in selectors:
+            for key, value in selectors[f'{url}'].items():
+                elements[key] = soup.select(f'{value}')[0].text.strip()
+        else:
+            for key, value in selectors['for_all'].items():
+                try:
+                    elements[key] = soup.select(f'{value}')[0].text.strip()
+                except IndexError:
+                    elements[key] = None
+
+    print(elements)
 
 
     data = {
@@ -65,7 +69,7 @@ def get_data(page, url):
         'headers': json.dumps(headers),
         'schema_markup': json.dumps(schema_markup),
         'text': soup.text.replace('\n', ''),
-        'selectors': json.dumps(element)
+        'selectors': json.dumps(elements)
     }
     return data
 
