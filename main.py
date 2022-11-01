@@ -52,11 +52,17 @@ def get_data(page, url):
         elements = {}
         if url in selectors:
             for key, value in selectors[f'{url}'].items():
-                elements[key] = soup.select(f'{value}')[0].text.strip()
+                if isinstance(value, list):
+                    elements[key] = soup.select(f'{value[0]}')[0].get(f'{value[1]}')
+                else:
+                    elements[key] = soup.select(f'{value}')[0].text.strip()
         else:
             for key, value in selectors['for_all'].items():
                 try:
-                    elements[key] = soup.select(f'{value}')[0].text.strip()
+                    if isinstance(value, list):
+                        elements[key] = soup.select(f'{value[0]}')[0].get(f'{value[1]}')
+                    else:
+                        elements[key] = soup.select(f'{value}')[0].text.strip()
                 except IndexError:
                     elements[key] = None
 
