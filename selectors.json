@@ -1,0 +1,15 @@
+{
+  "https://24sevenoffice.com/no/": {
+    "h2": "#__layout > div > main > div > header > div > div > div > div.w-full.lg\\:\\!text-left > h2",
+    "h1": "#__layout > div > main > div > header > div > div > div > div.w-full.lg\\:\\!text-left > h1",
+    "p": "#__layout > div > main > div > header > div > div > div > div.w-full.lg\\:\\!text-left > div.mt-4.text-xl.leading-8.text-center.tracking-\\[0\\.0075em\\].lg\\:text-2xl.lg\\:leading-\\[2\\.375rem\\].lg\\:mt-6.lg\\:max-w-\\[992px\\].m-auto.block-content.lg\\:\\!text-left > p"
+  },
+
+  "for_all": {
+    "headline": "#main > div > div > div.col.col-lg-8 > article > header > h1",
+    "description": "#main > div > div > div.col.col-lg-8 > article > div > div > div.col.col-12.col-xl-8 > p",
+    "image": ["#main > div > div > div.col.col-lg-8 > article > header > figure > img", "src"],
+    "authorName": "#main > div > div > div.col.col-lg-8 > article > header > section > div.byline__author > div > h4",
+    "datePublished": "#main > div > div > div.col.col-lg-8 > article > header > section > div.byline__date > p > time"
+  }
+}
